@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#10b981', // green-500
+                        secondary: '#34d399', // green-400
+                        darkBg: '#0f172a',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .yt-thumbnail-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+
+        .yt-thumbnail-wrapper img {
+            transition: transform 0.5s ease;
+        }
+
+        .yt-thumbnail-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .yt-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .yt-thumbnail-wrapper:hover .yt-play-btn {
+            background-color: #ff0000;
+        }
+
+        .yt-play-btn::before {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navbar -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#"
+                class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-emerald-600">Portfolio.</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#works" class="text-gray-600 hover:text-green-600 font-medium transition-colors">ワークス</a>
+                <a href="#about" class="text-gray-600 hover:text-green-600 font-medium transition-colors">経歴</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <nav class="flex flex-col px-6 py-4 space-y-4">
+                <a href="#youtube"
+                    class="text-gray-600 hover:text-green-600 font-medium transition-colors mobile-link">YouTube</a>
+                <a href="#niconico"
+                    class="text-gray-600 hover:text-green-600 font-medium transition-colors mobile-link">ニコニコ動画</a>
+                <a href="#x" class="text-gray-600 hover:text-green-600 font-medium transition-colors mobile-link">X
+                    (Twitter)</a>
+                <a href="#linestamp"
+                    class="text-gray-600 hover:text-[#06C755] font-medium transition-colors mobile-link">LINEスタンプ</a>
+                <a href="#note"
+                    class="text-gray-600 hover:text-green-600 font-medium transition-colors mobile-link">note</a>
+                <a href="#about"
+                    class="text-gray-600 hover:text-green-600 font-medium transition-colors mobile-link">経歴</a>
+            </nav>
+        </div>
+    </header>
+
+
+
+
+
+    <!-- Works Section -->
+    <section id="works" class="pt-32 pb-24 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 mt-6">
+                <h3 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight inline-block relative">
+                    Works
+                    <div class="absolute -bottom-3 left-0 w-full h-1.5 bg-gradient-to-r from-green-500 to-emerald-400 rounded-full opacity-90"></div>
+                </h3>
+                <p class="text-gray-600 mt-7 max-w-2xl mx-auto leading-relaxed">
+                    イラストから動画制作、そしてLINEスタンプまで。<br class="hidden sm:block">
+                    日々のふとした思いつきを形にした、さまざまな創作活動の記録をご紹介します。<br>
+                    <span class="font-bold text-green-600 mt-2 inline-block">X（Twitter）の漫画「三丁目のボダ子さん」はほぼ毎日更新中！</span>
+                </p>
+                <p class="text-gray-400 mt-3 md:mt-2 text-sm max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
+                    From illustrations to video production, and even LINE stickers.<br class="hidden sm:block">
+                    A showcase of my creative journey, bringing everyday inspirations to life.
+                </p>
+            </div>
+
+            <!-- YouTube Videos -->
+            <div id="youtube" class="mb-20 scroll-mt-24">
+                <div class="flex items-center justify-center space-x-3 mb-8">
+                    <i class="fab fa-youtube text-red-600 text-3xl"></i>
+                    <h4 class="text-2xl font-bold text-gray-900">YouTube</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- YouTube Video 1 -->
+                    <div
+                        class="project-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-4 transition-all duration-300 hover:shadow-xl">
+                        <div class="relative w-full rounded-xl yt-thumbnail-wrapper" style="padding-top: 56.25%;"
+                            data-videoid="6LVHyoeOez8">
+                            <img src="https://img.youtube.com/vi/6LVHyoeOez8/maxresdefault.jpg"
+                                alt="YouTube Thumbnail 1" class="absolute top-0 left-0 w-full h-full object-cover">
+                            <div class="yt-play-btn"></div>
+                        </div>
+                        <div class="mt-5 px-2">
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">youtubeはこちら</h5>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Video 2 -->
+                    <div
+                        class="project-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-4 transition-all duration-300 hover:shadow-xl">
+                        <div class="relative w-full rounded-xl yt-thumbnail-wrapper" style="padding-top: 56.25%;"
+                            data-videoid="bB_9oseX9Ao">
+                            <img src="https://img.youtube.com/vi/bB_9oseX9Ao/maxresdefault.jpg"
+                                alt="YouTube Thumbnail 2" class="absolute top-0 left-0 w-full h-full object-cover">
+                            <div class="yt-play-btn"></div>
+                        </div>
+                        <div class="mt-5 px-2">
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">youtubeはこちら</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- And More text for YouTube -->
+                <div class="mt-4 flex justify-end w-full">
+                    <span class="text-gray-600 font-bold italic tracking-wider text-lg flex items-center hover:text-red-600 transition-colors">
+                        ...and more!
+                    </span>
+                </div>
+
+                <!-- More Videos Button -->
+                <div class="mt-8 text-center">
+                    <a href="https://youtube.com/channel/UCa_4X3zJMCqLFj5NSO4kXDg?si=YW86ae6laV3gat9l" target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center px-8 py-3 text-red-600 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">
+                        <i class="fab fa-youtube mr-2 text-xl"></i> その他の動画を見る
+                    </a>
+                </div>
+            </div>
+
+            <!-- Nico Nico Douga -->
+            <div id="niconico" class="mb-20 scroll-mt-24">
+                <div class="flex items-center justify-center space-x-3 mb-8">
+                    <!-- There is no specific FontAwesome icon for NicoNico in standard free sets, using tv icon as placeholder -->
+                    <i class="fas fa-tv text-gray-900 text-3xl"></i>
+                    <h4 class="text-2xl font-bold text-gray-900">ニコニコ動画</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Nico Nico Video 1 -->
+                    <div
+                        class="project-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-4 transition-all duration-300 hover:shadow-xl">
+                        <!-- Nico Nico Embed Scripts require their own tag -->
+                        <div class="relative w-full rounded-xl overflow-hidden">
+                            <script type="application/javascript"
+                                src="https://embed.nicovideo.jp/watch/sm45958847/script?w=100%25&h=100%25"></script>
+                        </div>
+                        <div class="mt-5 px-2">
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">ニコニコ動画はこちら</h5>
+                        </div>
+                    </div>
+
+                    <!-- Nico Nico Video 2 -->
+                    <div
+                        class="project-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-4 transition-all duration-300 hover:shadow-xl">
+                        <div class="relative w-full rounded-xl overflow-hidden">
+                            <script type="application/javascript"
+                                src="https://embed.nicovideo.jp/watch/sm45922760/script?w=100%25&h=100%25"></script>
+                        </div>
+                        <div class="mt-5 px-2">
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">ニコニコ動画はこちら</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- And More text for Nico Nico -->
+                <div class="mt-4 flex justify-end w-full">
+                    <span class="text-gray-600 font-bold italic tracking-wider text-lg flex items-center hover:text-gray-900 transition-colors">
+                        ...and more!
+                    </span>
+                </div>
+
+                <!-- More Nico Nico Videos Button -->
+                <div class="mt-8 text-center">
+                    <a href="https://www.nicovideo.jp/user/3624535" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center px-8 py-3 text-gray-900 border-2 border-gray-900 rounded-full font-bold hover:bg-gray-900 hover:text-white transition-colors">
+                        <i class="fas fa-tv mr-2 text-xl"></i> ニコニコのマイページを見る
+                    </a>
+                </div>
+            </div>
+
+            <!-- X / Twitter Posts -->
+            <div id="x" class="mb-20 scroll-mt-24">
+                <div class="flex items-center justify-center space-x-3 mb-8">
+                    <i class="fab fa-x-twitter text-gray-900 text-3xl"></i>
+                    <h4 class="text-2xl font-bold text-gray-900">X (Twitter)</h4>
+                </div>
+                <div class="max-w-2xl mx-auto">
+                    <!-- X Post 1 -->
+                    <div
+                        class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-6 flex justify-center items-center">
+                        <blockquote class="twitter-tweet" data-theme="light">
+                            <a href="https://twitter.com/shibaone1013/status/2004867549130096941"></a>
+                        </blockquote>
+                    </div>
+                    
+                    <!-- And More text for X -->
+                    <div class="mt-4 flex justify-end w-full pr-2">
+                        <span class="text-gray-600 font-bold italic tracking-wider text-lg flex items-center hover:text-gray-900 transition-colors">
+                            ...and more!
+                        </span>
+                    </div>
+
+                    <!-- Main X Account Button -->
+                    <div class="mt-8 mb-16 text-center">
+                        <a href="https://twitter.com/shibaone1013" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center px-10 py-4 text-white bg-gray-900 hover:bg-gray-800 rounded-full font-bold text-lg transition-transform hover:-translate-y-1 shadow-[0_4px_14px_0_rgba(0,0,0,0.39)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.23)]">
+                            <i class="fab fa-x-twitter text-2xl mr-3"></i> 漫画・イラストの作品用アカウントを見る
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Another Account Card -->
+                <div class="max-w-4xl mx-auto text-center">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">もうひとつのアカウント</h3>
+                    
+                    <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 relative overflow-hidden text-center">
+                        <!-- Decorative Icon Background -->
+                        <i class="fab fa-x-twitter text-gray-50 text-9xl absolute -bottom-4 -right-4 md:-bottom-10 md:-right-10 opacity-50 transform -rotate-12 pointer-events-none"></i>
+                        
+                        <div class="relative z-10">
+                            <i class="fab fa-x-twitter text-gray-900 text-3xl mb-4 md:mb-6"></i>
+                            <p class="text-gray-700 leading-relaxed text-base md:text-lg mb-8 max-w-2xl mx-auto font-medium">
+                                「yuzuyuzu」名義で、自分の実生活でのアルコールに関する問題やASDと向き合う日々をなるべく楽しく発信する別アカウントも運営しています。<br class="hidden md:block mt-2">
+                                こちらのアカウントでも<strong class="text-gray-900 font-bold border-b-2 border-green-400 opacity-90 pb-0.5">「三丁目のボダ子さんノンアル編」</strong>など、日々のリアルな葛藤をクスッと笑える漫画等で発信していますので、ご興味を持たれた方はぜひ覗いてみてください！
+                            </p>
+                            <a href="https://twitter.com/Yuzuyuz82578822" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center justify-center px-10 py-4 text-white bg-gray-900 hover:bg-gray-800 rounded-full font-bold text-lg transition-transform hover:-translate-y-1 shadow-[0_4px_14px_0_rgba(0,0,0,0.39)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.23)]">
+                                <i class="fab fa-x-twitter text-2xl mr-3"></i> 依存症・ASDアカウントを見る
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- X Widget Script embedded once -->
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+            <!-- LINE Stamp -->
+            <div id="linestamp" class="mb-20 scroll-mt-24">
+                <div class="flex items-center justify-center space-x-3 mb-8">
+                    <i class="fab fa-line text-[#06C755] text-3xl"></i>
+                    <h4 class="text-2xl font-bold text-gray-900 whitespace-nowrap">LINEスタンプ</h4>
+                </div>
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-8 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-xl relative">
+                        <!-- Decorative background -->
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-[#06C755] rounded-full opacity-10 blur-xl"></div>
+                        <div class="absolute -left-10 -bottom-10 w-24 h-24 bg-[#06C755] rounded-full opacity-10 blur-xl"></div>
+                        
+                        <div class="w-20 h-20 bg-[#06C755]/10 rounded-full flex items-center justify-center mb-6 z-10">
+                            <i class="fas fa-store text-[#06C755] text-4xl"></i>
+                        </div>
+                        <h5 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 z-10 leading-snug">
+                            <span class="inline-block">オリジナルLINEスタンプ</span><wbr><span class="inline-block">好評発売中！</span>
+                        </h5>
+                        <p class="text-gray-600 mb-6 z-10 leading-relaxed">
+                            日常会話で使いやすく、ちょっとユニークなオリジナルキャラクターの<span class="inline-block">LINEスタンプ</span>を販売しています。<br>お友達やご家族とのトークにぜひ使ってみてください！
+                        </p>
+                        
+                        <!-- Stickers Examples Grid -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-lg mx-auto mb-8 z-10">
+                            <!-- Example 1 -->
+                            <div onclick="previewSticker(this)" class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center aspect-square cursor-pointer relative z-10">
+                                <img src="images/stamp1.png?t=2" alt="LINEスタンプ例1" class="w-full h-full object-contain drop-shadow-sm pointer-events-none" onerror="this.src='https://placehold.co/200x200/f8f9fa/a1a1aa?text=Stamp+1'">
+                            </div>
+                            <!-- Example 2 -->
+                            <div onclick="previewSticker(this)" class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center aspect-square delay-75 cursor-pointer relative z-10">
+                                <img src="images/stamp2.png?t=3" alt="LINEスタンプ例2" class="w-full h-full object-contain drop-shadow-sm pointer-events-none" onerror="this.src='https://placehold.co/200x200/f8f9fa/a1a1aa?text=Stamp+2'">
+                            </div>
+                            <!-- Example 3 -->
+                            <div onclick="previewSticker(this)" class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center aspect-square delay-150 cursor-pointer relative z-10">
+                                <img src="images/stamp3.png?t=1" alt="LINEスタンプ例3" class="w-full h-full object-contain drop-shadow-sm pointer-events-none" onerror="this.src='https://placehold.co/200x200/f8f9fa/a1a1aa?text=Stamp+3'">
+                            </div>
+                            <!-- Example 4 -->
+                            <div onclick="previewSticker(this)" class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center aspect-square delay-200 cursor-pointer relative z-10">
+                                <img src="images/stamp4.png?t=1" alt="LINEスタンプ例4" class="w-full h-full object-contain drop-shadow-sm pointer-events-none" onerror="this.src='https://placehold.co/200x200/f8f9fa/a1a1aa?text=Stamp+4'">
+                            </div>
+                        </div>
+
+                        <!-- And More text -->
+                        <div class="z-10 -mt-2 mb-8 flex justify-end w-full max-w-lg mx-auto pr-2">
+                            <span class="text-gray-600 font-bold italic tracking-wider text-lg flex items-center hover:text-[#06C755] transition-colors">
+                                ...and more!
+                            </span>
+                        </div>
+
+                        <a href="https://line.me/S/shop/sticker/author/5829368" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center px-10 py-4 text-white bg-[#06C755] rounded-full font-bold text-lg hover:bg-[#05b34c] transition-all shadow-[0_4px_14px_0_rgba(6,199,85,0.39)] hover:shadow-[0_6px_20px_rgba(6,199,85,0.23)] hover:-translate-y-1 z-10 whitespace-nowrap">
+                            <i class="fab fa-line mr-2 text-2xl"></i> LINE STOREを見る
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Note -->
+            <div id="note" class="scroll-mt-24">
+                <div class="flex items-center justify-center space-x-3 mb-8">
+                    <i class="fas fa-pen-nib text-green-500 text-3xl"></i>
+                    <h4 class="text-2xl font-bold text-gray-900">note</h4>
+                </div>
+                <div class="max-w-2xl mx-auto">
+                    <div
+                        class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 p-8 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-xl">
+                        <p class="text-gray-600 mb-6">
+                            ブログプラットフォーム「note」にて、ITに関する知見や日々の学び、エッセイなどを執筆しています。
+                        </p>
+                        <a href="https://note.com/fishkun" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center px-8 py-3 text-white bg-green-500 rounded-full font-bold hover:bg-green-600 transition-colors shadow-md hover:shadow-lg">
+                            <i class="fas fa-external-link-alt mr-2"></i> noteの記事を読む
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <div
+                        class="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <img src="images/profile.png" alt="Profile" class="w-full h-full object-contain">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-sm font-bold text-green-600 uppercase tracking-wider mb-2">About Me</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 flex flex-wrap items-baseline gap-2">
+                        ひーでぃ <span class="text-xl md:text-2xl text-gray-500 font-medium">（yuzuyuzu）</span>
+                    </h3>
+                    <div class="text-gray-600 leading-relaxed space-y-4">
+                        <p>
+                            普段はごく普通の会社員として働きながら、休日の時間を使ってイラストを描いたり、SynthesizerVを使った「歌ってみた動画」や日常系の漫画など、ちょっとしたクリエイティブ活動を楽しんでいます。
+                        </p>
+                        <p>
+                            我が家には可愛い愛犬がいるため、<strong class="font-semibold text-gray-800">犬をモチーフにしたキャラクターや題材の作品が多く登場する</strong>のが特徴です！🐾
+                        </p>
+                        <p class="text-sm border-l-4 border-green-400 pl-3 py-1 my-2 bg-gray-50 rounded-r-md">
+                            💡 頭の中のアイデアを形にしたり新しい表現に挑戦するため、一部の作品制作には<strong class="font-semibold text-gray-800">画像生成などのAIツール</strong>もアシスタントとして積極的に取り入れています。
+                        </p>
+                        <p>
+                            まだまだ手探りな部分もありますが、少しでもクスッと笑えたり、皆さんにほっこり楽しんでいただけるような作品作りを目指しています。<br>ぜひ色々な作品をゆっくり見ていってくださいね！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Portfolio.</h3>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                        class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://note.com/fishkun" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-green-500 transition-colors text-xl"><i
+                        class="fas fa-pen-nib"></i></a>
+                <a href="https://youtube.com/channel/UCa_4X3zJMCqLFj5NSO4kXDg?si=YW86ae6laV3gat9l" target="_blank"
+                    rel="noopener noreferrer" class="text-gray-400 hover:text-red-500 transition-colors text-xl"><i
+                        class="fab fa-youtube"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                        class="fab fa-dribbble"></i></a>
+            </div>
+            <p class="text-sm">
+                &copy; 2026 Hidi. All rights reserved.<br>
+                <span class="text-xs mt-2 inline-block text-gray-500">Designed & Built with HTML & Tailwind CSS</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+                header.classList.replace('bg-transparent', 'glass');
+            } else {
+                header.classList.remove('shadow-sm');
+                header.classList.replace('glass', 'bg-transparent');
+            }
+        });
+
+        // YouTube Thumbnail Click to Load
+        document.querySelectorAll('.yt-thumbnail-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('click', function () {
+                const videoId = this.getAttribute('data-videoid');
+                const iframe = document.createElement('iframe');
+                iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+                iframe.setAttribute('title', 'YouTube video player');
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                iframe.setAttribute('allowfullscreen', 'true');
+                iframe.classList.add('absolute', 'top-0', 'left-0', 'w-full', 'h-full', 'rounded-xl');
+
+                this.innerHTML = '';
+                this.appendChild(iframe);
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // In-place Sticker Preview Animation (LINE Store style)
+        function previewSticker(element) {
+            // Do not run if already animating
+            if (element.classList.contains('scale-[1.6]') || element.classList.contains('scale-150')) return;
+            
+            // Add classes to make it pop out visually above the others
+            element.classList.add('scale-150', 'z-50', 'shadow-2xl');
+            element.classList.remove('hover:-translate-y-1', 'z-10', 'hover:shadow-md');
+            
+            // Automatically return to normal state after a longer duration (3.2 seconds)
+            setTimeout(() => {
+                element.classList.remove('scale-150', 'z-50', 'shadow-2xl');
+                element.classList.add('hover:-translate-y-1', 'z-10', 'hover:shadow-md');
+            }, 3200);
+        }
+    </script>
+</body>
+
+</html>
